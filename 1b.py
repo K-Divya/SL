@@ -10,35 +10,69 @@
 # as list of tuples with attributes - 
 # from unit value , to unit value sorted by 
 # the user’s choice (from-value or to-value).
+#PART A: 1
+import datetime
 
-def FtoC(F):
-	C = (5.0/9.0)*(F-32)
-	return C
+def to_degree(temp):
+	return (float(temp)-32)*5/9
+	
+def to_fahre(temp):
+	return (float(temp)*9/5) + 32
+	
+def display():
 
-def CtoF(C):
-	F = (9.0/5.0)*C + 32
-	return F
+	print("\n1.Sort by from value")
+	print("\n2.Sort by to value")
+	c = int(input("\nEnter your choice : "))
+	
+	if c == 1:
+		new = sorted(old, key=lambda x: x[2])
+	else:
+		new = sorted(old, key=lambda x: x[3])
+		
+	for i in new:
+			print ("******************************************")
+			print ("\nFROM : ",i[0])
+			print ("\nTO   : ",i[1])
+			if(i[0] in "Degree"):
+				print ("\nDEG  : ",i[2])
+				print ("\nFAHRENHEIT : ",i[3])
+			else:
+				print ("\nDEG  : ",i[3])
+				print ("\nFAHRENHEIT : ",i[2])
+			print ("******************************************")
+	
+old = []
 
-def choice():
-	print ("1. Fahrenheit to celcius.")
-	print ("2. Celcius to Fahrenheit.")
-	print ("3. Exit.")
 
-def main():
-	again = True
-	while(again):
-		choice = int(input("Enter a choice."))
-		if choice == 1:
-			F = float(input("Temperature in Fahrenheit?\n"))
-			C = FtoC(F)
-			print ("Temperature in Celcius: ", C)
+while(1):
+	print("-------------------------------------------------------------------------------")
+	print("\n1.Degree to Fahrenheit")
+	print("\n2.Fahrenheit to Degree")
+	print("\n3.View previous conversions")
+	print("\n4.Exit")
+	
+	ch = int(input("Enter your choice : "))
+	
+	if(ch == 1):
+		
+		deg = int(input("\nEnter in degrees : "))
+		fahre = to_fahre(deg)
+		print(" FAHRENHEIT : ",fahre)
+		tup = ("Degree","Fahrenheit",deg,fahre)
+		old.append(tup)
+	elif(ch == 2):
+		
+		fahre = int(input("\nEnter in fahrenheit : "))
+		deg = to_degree(fahre)
+		print("DEGREE : ",deg)
+		tup = ("Fahrenheit","Degree",fahre,deg)
+		old.append(tup)
+	elif(ch == 3):
+		display()
+		
+	else:
+		exit()
 
-		if choice == 2:
-			C = float(input("Temperature in Celcius?\n"))
-			F = CtoF(C)
-			print ("Temperature in Fahrenheit: ", F)
+				
 
-		elif choice == 3:
-			again = False
-choice()
-main()
